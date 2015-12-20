@@ -2,13 +2,16 @@ package org.scaladebugger.samples
 
 import org.scaladebugger.api.debuggers.ListeningDebugger
 import org.scaladebugger.api.utils.JDITools
+import org.scaladebugger.samples.mains.SomeListeningMainClass
 
 /**
  * Starts a target JVM process and connects to it using the
  * listening debugger.
  */
 object ListeningDebuggerExample extends App {
-  val className = classOf[SomeListeningMainClass].getName
+  // Get the executing class name (remove $ from object class name)
+  val klass = SomeListeningMainClass.getClass
+  val className = klass.getName.replaceAllLiterally("$", "")
 
   val listeningDebugger = ListeningDebugger(hostname = "localhost", port = 5005)
 
@@ -33,13 +36,4 @@ object ListeningDebuggerExample extends App {
 
   // Keep the sample program running while our debugger is running
   while (listeningDebugger.isRunning) Thread.sleep(1)
-}
-
-/**
- * Sample main class that does nothing.
- */
-class SomeListeningMainClass {
-  def main(args: Array[String]): Unit = {
-    // Does nothing
-  }
 }
