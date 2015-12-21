@@ -1,4 +1,4 @@
-package org.scaladebugger.samples
+package org.scaladebugger.samples.misc
 
 import org.scaladebugger.api.utils.JDITools
 

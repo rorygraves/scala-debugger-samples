@@ -1,8 +1,7 @@
-package org.scaladebugger.samples
+package org.scaladebugger.samples.attaching
 
 import org.scaladebugger.api.debuggers.AttachingDebugger
 import org.scaladebugger.api.utils.JDITools
-import org.scaladebugger.samples.mains.SomeAttachingMainClass
 
 /**
  * Starts a target JVM process and connects to it using the

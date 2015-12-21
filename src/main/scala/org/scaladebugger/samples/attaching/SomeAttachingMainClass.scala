@@ -1,4 +1,4 @@
-package org.scaladebugger.samples.mains
+package org.scaladebugger.samples.attaching
 
 /**
  * Sample main class that does nothing.

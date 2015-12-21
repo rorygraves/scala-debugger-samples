@@ -1,4 +1,4 @@
-package org.scaladebugger.samples.mains
+package org.scaladebugger.samples.watchpoints
 
 object SingleWatchpointMainClass {
   def main(args: Array[String]): Unit = {

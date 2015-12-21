@@ -1,8 +1,7 @@
-package org.scaladebugger.samples
+package org.scaladebugger.samples.listening
 
 import org.scaladebugger.api.debuggers.ListeningDebugger
 import org.scaladebugger.api.utils.JDITools
-import org.scaladebugger.samples.mains.SomeListeningMainClass
 
 /**
  * Starts a target JVM process and connects to it using the

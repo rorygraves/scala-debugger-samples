@@ -1,4 +1,4 @@
-package org.scaladebugger.samples.mains
+package org.scaladebugger.samples.listening
 
 /**
  * Sample main class that does nothing.

@@ -1,15 +1,14 @@
-package org.scaladebugger.samples
+package org.scaladebugger.samples.breakpoints
 
 import org.scaladebugger.api.debuggers.LaunchingDebugger
 import org.scaladebugger.api.utils.JDITools
-import org.scaladebugger.samples.mains.SingleStepMainClass
 
 /**
- * Creates a single step to demonstrate the process.
+ * Creates a single breakpoint to demonstrate the process.
  */
-object SingleStepExample extends App {
+object SingleBreakpointExample extends App {
   // Get the executing class name (remove $ from object class name)
-  val klass = SingleStepMainClass.getClass
+  val klass = SingleBreakpointMainClass.getClass
   val className = klass.getName.replaceAllLiterally("$", "")
 
   // Add our main class to the classpath used to launch the class
@@ -29,23 +28,14 @@ object SingleStepExample extends App {
     val fileName = JDITools.scalaClassStringToFileString(className)
     val lineNumber = 7
 
-    // On reaching a breakpoint for our class below, step to the next
-    // line and then shutdown our debugger
-    s.onUnsafeBreakpoint(fileName, lineNumber).foreach(be => {
-      val path = be.location().sourcePath()
-      val line = be.location().lineNumber()
+    // On reaching a breakpoint for our class below, print out our result
+    // and shut down our debugger
+    s.onUnsafeBreakpoint(fileName, lineNumber).foreach(e => {
+      val path = e.location().sourcePath()
+      val line = e.location().lineNumber()
 
       println(s"Reached breakpoint for $path:$line")
-
-      // Step methods return a future that occurs when the step finishes
-      import scala.concurrent.ExecutionContext.Implicits.global
-      s.stepOverLine(be.thread()).foreach(se => {
-        val path = se.location().sourcePath()
-        val line = se.location().lineNumber()
-
-        println(s"Stepped to $path:$line")
-        launchingDebugger.stop()
-      })
+      launchingDebugger.stop()
     })
   }
 

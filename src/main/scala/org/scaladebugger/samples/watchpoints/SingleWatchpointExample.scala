@@ -1,8 +1,7 @@
-package org.scaladebugger.samples
+package org.scaladebugger.samples.watchpoints
 
 import org.scaladebugger.api.debuggers.LaunchingDebugger
 import org.scaladebugger.api.utils.JDITools
-import org.scaladebugger.samples.mains.{SingleWatchpointOtherClass, SingleWatchpointMainClass}
 
 /**
  * Creates a single step to demonstrate the process.
