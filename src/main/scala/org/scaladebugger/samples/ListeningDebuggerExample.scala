@@ -13,7 +13,7 @@ object ListeningDebuggerExample extends App {
   val klass = SomeListeningMainClass.getClass
   val className = klass.getName.replaceAllLiterally("$", "")
 
-  val listeningDebugger = ListeningDebugger(hostname = "localhost", port = 5005)
+  val listeningDebugger = ListeningDebugger(port = 5005)
 
   listeningDebugger.start { s =>
     println("Received connection from JVM: " + s.uniqueId)
