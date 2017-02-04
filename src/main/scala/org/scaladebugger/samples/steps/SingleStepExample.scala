@@ -30,17 +30,17 @@ object SingleStepExample extends App {
 
     // On reaching a breakpoint for our class below, step to the next
     // line and then shutdown our debugger
-    s.onUnsafeBreakpoint(fileName, lineNumber).foreach(be => {
-      val path = be.location().sourcePath()
-      val line = be.location().lineNumber()
+    s.getOrCreateBreakpointRequest(fileName, lineNumber).foreach(be => {
+      val path = be.location.sourcePath
+      val line = be.location.lineNumber
 
       println(s"Reached breakpoint for $path:$line")
 
       // Step methods return a future that occurs when the step finishes
       import scala.concurrent.ExecutionContext.Implicits.global
-      s.stepOverLine(be.thread()).foreach(se => {
-        val path = se.location().sourcePath()
-        val line = se.location().lineNumber()
+      s.stepOverLine(be.thread).foreach(se => {
+        val path = se.location.sourcePath
+        val line = se.location.lineNumber
 
         println(s"Stepped to $path:$line")
         launchingDebugger.stop()

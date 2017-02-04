@@ -30,9 +30,9 @@ object SingleBreakpointExample extends App {
 
     // On reaching a breakpoint for our class below, print out our result
     // and shut down our debugger
-    s.onUnsafeBreakpoint(fileName, lineNumber).foreach(e => {
-      val path = e.location().sourcePath()
-      val line = e.location().lineNumber()
+    s.getOrCreateBreakpointRequest(fileName, lineNumber).foreach(e => {
+      val path = e.location.sourcePath
+      val line = e.location.lineNumber
 
       println(s"Reached breakpoint for $path:$line")
       launchingDebugger.stop()

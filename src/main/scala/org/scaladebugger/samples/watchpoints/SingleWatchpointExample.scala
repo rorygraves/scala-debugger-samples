@@ -28,14 +28,10 @@ object SingleWatchpointExample extends App {
     val fieldName = "x"
 
     println(s"Watching $otherClassName.$fieldName")
-    s.onUnsafeModificationWatchpoint(otherClassName, fieldName).foreach(e => {
-      // Implicit enables conversion of standard value to wrapper value
-      // that we use to extract the value locally
-      import org.scaladebugger.api.lowlevel.wrappers.Implicits._
-
-      val className = e.field().declaringType().name()
-      val fieldName = e.field().name()
-      val newValue = e.valueToBe().value()
+    s.getOrCreateModificationWatchpointRequest(otherClassName, fieldName).foreach(e => {
+      val className = e.field.declaringTypeInfo.name
+      val fieldName = e.field.name
+      val newValue = e.currentValue.toLocalValue
 
       println(s"$className field $fieldName was updated to $newValue")
       launchingDebugger.stop()
